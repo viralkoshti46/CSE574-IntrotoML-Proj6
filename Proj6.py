@@ -124,19 +124,6 @@ def main():
     print(f"Final MSE: {history[-1]:.8f}")
     print(f"Initial LR: {START_LR}; Final LR: {lr:.8f}")
     print(f"LR reductions: {reductions}; rejected epochs: {rejected}")
-    np.savez(
-        folder / "Project6_Results.npz",
-        x=x,
-        target=target,
-        w1=w1,
-        b1=b1,
-        w2=w2,
-        b2=b2,
-        history=history,
-        learning_rate=lr,
-        reductions=reductions,
-        rejected=rejected,
-    )
 
 
 if __name__ == "__main__":
