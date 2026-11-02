@@ -44,8 +44,8 @@ def main():
     fig.savefig(folder / "Project6_Data.png", dpi=170)
     plt.close(fig)
 
-    # Each hidden tanh neuron starts with a different transition location.
-    # All 73 weights (24+24+24+1) are trained by online BP.
+    # Initialize the hidden neurons to respond to different parts of x.
+    # The network has 73 trainable parameters, including biases.
     centers = np.linspace(0.02, 0.98, HIDDEN)
     w1 = rng.choice([-1.0, 1.0], size=HIDDEN) * rng.uniform(10.0, 20.0, HIDDEN)
     b1 = -w1 * centers + rng.normal(0, 0.15, HIDDEN)
@@ -88,9 +88,13 @@ def main():
 
     fig, ax = plt.subplots(figsize=(8, 4.5))
     ax.plot(range(len(history)), history)
+
+    # Log scale makes the smaller MSE improvements easier to see.
+    ax.set_yscale("log")
+
     ax.set(
         xlabel="Epoch",
-        ylabel="Training MSE",
+        ylabel="Training MSE (log scale)",
         title="Online backpropagation: MSE by epoch",
     )
     ax.grid(alpha=0.2)
